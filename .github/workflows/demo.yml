@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       script-file: ${{ steps.publish.outputs.script-file }}
+      # 'script-file' is the name given by me for the output.
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -29,7 +30,7 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish
-        run: find dist/assets/*.js -type f -execdir 'script-file={}' >> $GITHUB_OUTPUT ';'
+        run: find dist/assets/*.js -type f -execdir 'script-file={} >> $GITHUB_OUTPUT' ';'
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
