@@ -30,8 +30,8 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish
-        run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
-        # run: find dist/assets/*.js -type f -execdir echo 'script-file={} >> $GITHUB_OUTPUT' ';'
+        # run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';' deprecated
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={} >> $GITHUB_OUTPUT' ';'
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -51,6 +51,6 @@ jobs:
       - name: Output contents 
         run: ls 
       - name: Output filename
-        run: echo "${{ needs.build.outputs.script-file}}"
+        run: echo "${{ needs.build.outputs.script-file }}"
       - name: Deploy
         run: echo "Deploying..."
