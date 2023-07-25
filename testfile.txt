@@ -1,3 +1,5 @@
 Testing my new PR template.
 
 testing release notes now.
+
+testing how pr title affects release notes.
