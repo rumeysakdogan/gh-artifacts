@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - feature/*
   pull_request:
     branches: [main]
     types: [opened, reopened]
@@ -12,9 +13,22 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Print Object
+        run: echo ${{ json.stringify(github.event) }}
+      - name: Print GitHub Context
+        run: |
+          echo "Github context: ${{ github }}"
+      - name: Get pull request title
+        run: |
+          echo ${{ github.event.pull_request.title }}
       - name: Enforce Contribution Policies
-        if: github.event_name == 'pull_request'
-        run: $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh ${{ github.head_ref}}
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          chmod +x $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh
+          $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh ${{ github.head_ref}}
+        env:
+          PR_TITLE: "${{ github.event.pull_request.title }}"
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
