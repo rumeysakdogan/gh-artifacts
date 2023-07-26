@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Print GitHub Context
+        run: |
+          echo "Github context: ${{ github }}"
       - name: Get pull request title
         run: |
           echo ${{ github.event.pull_request.title }}
