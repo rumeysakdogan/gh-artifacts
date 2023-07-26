@@ -7,7 +7,7 @@ commit_message=$(git log -1 --pretty=format:%s)
 
 # Get the PR title from the environment variable (GITHUB_HEAD_REF)
 # This assumes you are using the `pull_request` event, where GITHUB_HEAD_REF holds the PR branch name
-pr_title="${{ github.event.pull_request.title }}"
+pr_title=$PR_TITLE
 
 # Check if the commit message or PR title follows the contribution policies
 if [[ ! $commit_message =~ ^(Add|Update|Fix|Remove):[[:space:]] || ! $pr_title =~ ^(Add|Update|Fix|Remove):[[:space:]] ]]; then

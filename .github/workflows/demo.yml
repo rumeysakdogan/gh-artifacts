@@ -19,6 +19,8 @@ jobs:
         run: |
           chmod +x $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh
           $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh ${{ github.head_ref}}
+        env:
+          PR_TITLE: "${{ github.event.pull_request.title }}"
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
