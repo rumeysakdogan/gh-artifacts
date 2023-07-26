@@ -3,7 +3,7 @@
 echo "INFO: Checking whether the commit message and PR title adhere to the contribution policies."
 
 # Get the commit message of the current HEAD commit
-commit_message=$1
+commit_message=$(git log -1 --pretty=format:%s)
 
 echo $commit_message
 # Check if the commit message or PR title follows the contribution policies
