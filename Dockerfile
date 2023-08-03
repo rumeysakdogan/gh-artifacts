@@ -30,6 +30,10 @@ ARG 11
 
 ARG 12
 
+ENV mykey=myvalue \
+    apple=good \ 
+    fish=smells
+
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
 # info1

@@ -31,4 +31,5 @@ echo "line_to_start_append: $line_to_start_append"
 lines_to_move=$(sed -n "${lines_to_move_begin},${lines_to_move_end}p" "$input_file")
 echo -e "lines_to_move: \n$lines_to_move"
 
-#first_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "()")
+first_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=\+)(\d+)(?=,?\d* @@)")
+last_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | tac | grep -m 1 -oP "(?<=\+)(\d+)(?=,?\d* @@)")
