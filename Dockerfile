@@ -39,6 +39,16 @@ RUN dsahdklahdaldhak \
 # info4
 #####################################
 
+RUN vdkfgdklghdlkghdflk
+RUN fhdslfhdlfgdhgldghdlkg \
+ && fhdfkdshf \
+ && dfksjfghsk \
+ && rm gashjgkh
+
+RUN --mount=secret,id=netrc,dst=/root/.netrc
+    pip3 install --no-cache-dir --ignore-installed
+    pandas=6.7.8
+
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
 # info1
