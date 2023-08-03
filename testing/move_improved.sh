@@ -53,3 +53,25 @@ ${DEBUG} && echo "last_changed_line: $last_changed_line"
 # Move the lines within the defined range above the start threshold block
 lines_to_move=$(sed -n "${first_changed_line},${last_changed_line}p" "$input_file")
 ${DEBUG} && echo -e "lines_to_move: \n$lines_to_move"
+
+
+# Save the lines to a temporary file
+echo "$lines_to_move" > /tmp/temp_lines_to_move.txt
+
+# Append the lines to the input file starting from the specified position
+sed -i "${line_to_start_append}r /tmp/temp_lines_to_move.txt" "$input_file"
+
+# # Clean up the temporary file
+# rm /tmp/temp_lines_to_move.txt
+
+# # delete new changes placed between thresholds from dockerfile
+# sed -i "${first_changed_line},${last_changed_line}d" "$input_file"
+# ${DEBUG} && echo "New changes placed between thresholds deleted from dockerfile"
+
+
+
+
+
+
+
+

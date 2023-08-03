@@ -49,6 +49,9 @@ RUN --mount=secret,id=netrc,dst=/root/.netrc
     pip3 install --no-cache-dir --ignore-installed
     pandas=6.7.8
 
+RUN --mount=secret,id=netrc,dst=/root/.netrc
+    pip3 install --no-cache-dir --ignore-installed
+    kaleo=1.2.3
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
 # info1
