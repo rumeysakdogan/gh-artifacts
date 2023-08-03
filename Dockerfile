@@ -16,14 +16,6 @@ RUN 8
 
 RUN 9
 
-######################################
-# NEXT RELEASE CHANGES START THRESHOLD
-# info1
-# info2
-# info3
-# info4
-#####################################
-
 RUN 10
 
 ARG 11
@@ -38,6 +30,14 @@ RUN dsahdklahdaldhak \
     hdhgfksfgkjs \
     sgfksdfgdsjfd \
     python==3.9.8
+
+######################################
+# NEXT RELEASE CHANGES START THRESHOLD
+# info1
+# info2
+# info3
+# info4
+#####################################
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
