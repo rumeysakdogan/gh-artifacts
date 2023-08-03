@@ -43,8 +43,8 @@ ${DEBUG} && echo "first_changed_line: $first_changed_line"
 # last_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | tac | grep -m 1 -oP "(?<=-)(\d+)(?=,?\d* @@)" | head -n 1)
 # ${DEBUG} && echo "last_changed_line: $last_changed_line"
 
-first_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=\+)(\d+)(?=,?\d* @@)")
-total_changed_lines=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=,)\d+(?=,?\d*\s+@@)") 
+total_changed_lines=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=,)\d+(?=,?\d*\s+@@)")
+${DEBUG} && echo "total_changed_lines: $total_changed_lines" 
 last_changed_line=$(( first_changed_line + total_changed_lines - 1 ))
 ${DEBUG} && echo "last_changed_line: $last_changed_line"
 
@@ -55,19 +55,32 @@ ${DEBUG} && echo "last_changed_line: $last_changed_line"
 lines_to_move=$(sed -n "${first_changed_line},${last_changed_line}p" "$input_file")
 ${DEBUG} && echo -e "lines_to_move: \n$lines_to_move"
 
+# Save the lines to a temporary file
+echo "$lines_to_move" > /tmp/temp_lines_to_move.txt
 
-# # Save the lines to a temporary file
-# echo "$lines_to_move" > /tmp/temp_lines_to_move.txt
-
-# # Append the lines to the input file starting from the specified position
-# sed -i "${line_to_start_append}r /tmp/temp_lines_to_move.txt" "$input_file"
-
-# # delete new changes placed between thresholds from dockerfile
+# delete new changes placed between thresholds from dockerfile
 sed -i "${first_changed_line},${last_changed_line}d" "$input_file"
 ${DEBUG} && echo "New changes placed between thresholds deleted from dockerfile"
 
-# # Clean up the temporary file
-# rm /tmp/temp_lines_to_move.txt
+# Append the lines to the input file starting from the specified position
+sed -i "${line_to_start_append}r /tmp/temp_lines_to_move.txt" "$input_file"
+
+# Find the line number above the target lines
+line_number_above=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "$input_file" | cut -d ':' -f1)
+
+# If the target lines are found, add a blank line above them
+if [ -n "$line_number_above" ]; then
+    line_number_above=$((line_number_above - 1))  # Line number above the target lines
+
+    # Add the blank line above the target lines
+    sed -i -e "${line_number_above}i\\\\n" "$input_file"
+    #sed "${line_number_above}s/$/\n/"
+else
+    echo "Target lines not found in the file."
+fi
+
+# Clean up the temporary file
+rm /tmp/temp_lines_to_move.txt
 
 
 

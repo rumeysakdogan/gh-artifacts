@@ -31,6 +31,11 @@ RUN dsahdklahdaldhak \
     sgfksdfgdsjfd \
     python==3.9.8
 
+RUN djskflhskfhldf \
+    && csidfhlseifhfl \
+    && dfhdkfghd \
+    pylint=6.5.4
+
 ######################################
 # NEXT RELEASE CHANGES START THRESHOLD
 # info1
@@ -38,11 +43,6 @@ RUN dsahdklahdaldhak \
 # info3
 # info4
 #####################################
-
-RUN djskflhskfhldf \
-    && csidfhlseifhfl \
-    && dfhdkfghd \
-    pylint=6.5.4
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
