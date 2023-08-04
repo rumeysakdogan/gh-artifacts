@@ -74,11 +74,13 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ENV key2=value2
+RUN zzzzzzzz \
+    && mmmmmmmmm \
+    cooly_tooly=1.2.3
 
-RUN abc \
-    && def \
-    cool_tool=1.2.3
+ARG myarg
+
+ENV key3=value3
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
