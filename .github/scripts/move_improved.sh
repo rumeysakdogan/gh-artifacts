@@ -24,7 +24,7 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     first_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=\+)(\d+)(?=,?\d* @@)")
     ${DEBUG} && echo "first_changed_line: $first_changed_line"
 
-    total_changed_lines=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=,)\d+(?=,?\d*\s+@@)")
+    total_changed_lines=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=,)(\d+)(?=,?\d*\s+@@)")
     ${DEBUG} && echo "total_changed_lines: $total_changed_lines" 
     last_changed_line=$(( first_changed_line + total_changed_lines - 1 ))
     ${DEBUG} && echo "last_changed_line: $last_changed_line"
