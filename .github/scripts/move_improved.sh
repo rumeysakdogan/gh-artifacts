@@ -8,6 +8,7 @@ if test "$1" == "--debug";then
     shift
 fi
 
+#changed_files=$(git diff --name-only HEAD~1)
 input_file="Dockerfile"
 
 # Check if the input file exists
@@ -39,19 +40,11 @@ ${DEBUG} && echo "line_to_start_append: $line_to_start_append"
 
 first_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=\+)(\d+)(?=,?\d* @@)")
 ${DEBUG} && echo "first_changed_line: $first_changed_line"
-# last_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | tac | grep -m 1 -oP "(?<=\+)(\d+)(?=,?\d* @@)")
-# last_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | tac | grep -m 1 -oP "(?<=-)(\d+)(?=,?\d* @@)" | head -n 1)
-# ${DEBUG} && echo "last_changed_line: $last_changed_line"
 
 total_changed_lines=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=,)\d+(?=,?\d*\s+@@)")
 ${DEBUG} && echo "total_changed_lines: $total_changed_lines" 
 last_changed_line=$(( first_changed_line + total_changed_lines - 1 ))
 ${DEBUG} && echo "last_changed_line: $last_changed_line"
-
-# Move the lines within the defined range above the start threshold block
-# lines_to_move=$(sed -n "${lines_to_move_begin},${lines_to_move_end}p" "$input_file")
-# ${DEBUG} && echo -e "lines_to_move: \n$lines_to_move"
-# Move the lines within the defined range above the start threshold block
 lines_to_move=$(sed -n "${first_changed_line},${last_changed_line}p" "$input_file")
 ${DEBUG} && echo -e "lines_to_move: \n$lines_to_move"
 
@@ -83,10 +76,3 @@ cat Dockerfile
 
 # Clean up the temporary file
 rm /tmp/temp_lines_to_move.txt
-
-
-
-
-
-
-
