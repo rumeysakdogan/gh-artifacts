@@ -74,13 +74,10 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN zzzzzzzz \
-    && mmmmmmmmm \
-    cooly_tooly=1.2.3
-
-ARG myarg
-
-ENV key3=value3
+RUN apt-get update && \
+    apt-get install -y package1 package2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
