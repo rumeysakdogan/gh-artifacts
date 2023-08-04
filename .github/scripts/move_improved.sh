@@ -50,12 +50,21 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
         line_number_above=$((start_threshold_line_after_move - 1))  # Line number above the target lines
 
         # Add the blank line above the target lines
-        sed -i "${start_threshold_line_after_move}i\\n" "Dockerfile"
+        sed -i -e "${start_threshold_line_after_move}i\\\\n" "Dockerfile"
+        #sed -i "${start_threshold_line_after_move}i\\n" "Dockerfile" did not work
         #sed -i '${start_threshold_line_after_move}N;i\' "Dockerfile" did not work
         #sed -i -e "${start_threshold_line_after_move}i\\\\n" "Dockerfile" # adds double linebreak
         #sed -i -e "${start_threshold_line_after_move}i\&\"" "Dockerfile" did not work
         #sed "${start_threshold_line_after_move}s/$/\n/" did not work
         #sed -i "${start_threshold_line_after_move}a\\" "Dockerfile" did not work
+
+        start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
+        line_number_above=$((start_threshold_line_after_move - 2))
+
+        sed -i "${line_number_above}d" "Dockerfile"
+        start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
+        line_number_below=$((start_threshold_line_after_move + 6))
+        sed -i "${line_number_below}d" "Dockerfile"
     else
         echo "Target lines not found in the file."
     fi

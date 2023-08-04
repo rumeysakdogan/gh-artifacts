@@ -74,9 +74,10 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ENV mykey=myvalue \
-    apple=good \ 
-    fish=smells
+RUN apt-get update && \
+    apt-get install -y package1 package2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
