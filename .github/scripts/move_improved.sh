@@ -58,9 +58,12 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
         #sed "${start_threshold_line_after_move}s/$/\n/" did not work
         #sed -i "${start_threshold_line_after_move}a\\" "Dockerfile" did not work
 
+        echo "::group:: print Dockerfile"
+        cat Dockerfile
+        echo "::endgroup::"
         start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
         ${DEBUG} && echo "start_threshold_line after adding double linebreak: $start_threshold_line_after_move"
-        line_number_above=$((start_threshold_line_after_move - 1))
+        line_number_above=$((start_threshold_line_after_move - 2))
 
         sed -i "${line_number_above}d" "Dockerfile"
         start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
