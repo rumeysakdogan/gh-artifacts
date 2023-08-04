@@ -74,10 +74,10 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN aaaaaaaaaa \
-    && bbbbbbbbb \
+RUN eee \
+    && fffff \
     && ccccccc \
-    az-cli=2.3.4
+    az-cli=2.6.4
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD

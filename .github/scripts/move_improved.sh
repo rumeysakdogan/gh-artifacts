@@ -32,14 +32,14 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     ${DEBUG} && echo -e "lines_to_move: \n$lines_to_move"
 
     # Save the lines to a temporary file
-    echo "$lines_to_move" > $GITHUB_WORKSPACE/tmp/temp_lines_to_move.txt
+    echo "$lines_to_move" > /tmp/temp_lines_to_move.txt
 
     # delete new changes placed between thresholds from dockerfile
     sed -i "${first_changed_line},${last_changed_line}d" "Dockerfile"
     ${DEBUG} && echo "New changes placed between thresholds deleted from dockerfile"
 
     # Append the lines to the input file starting from the specified position
-    sed -i "${line_to_start_append}r ${{ GITHUB_WORKSPACE }}/tmp/temp_lines_to_move.txt" "Dockerfile"
+    sed -i "${line_to_start_append}r /tmp/temp_lines_to_move.txt" "Dockerfile"
 
     # Find the line number above the target lines
     line_number_above=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
