@@ -13,10 +13,9 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-
       - name: Get pull request title
         run: |
-          echo "GITHUB_WORKSPACE: ${{ GITHUB_WORKSPACE }}"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
       - name: Move Dockerfile Thresholds
         shell: bash
         run: |
