@@ -74,12 +74,9 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ENV key1=value1
-
-RUN lllllllll \
-    && kkkkkkkk \
-    && xxxxxx \
-    azcli=3.6.4
+RUN dfdjfdgfgdjfd \
+    && bbbbbbb \
+    new_tool=1.2.3
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
