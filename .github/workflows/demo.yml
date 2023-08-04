@@ -21,9 +21,15 @@ jobs:
       - name: Move Dockerfile Thresholds
         shell: bash
         run: |
-          ls $GITHUB_WORKSPACE
+          echo "::group::List of Files in Workspace"
+          ls "$GITHUB_WORKSPACE"
+          echo "::endgroup::"
+          echo "::group::List of Changed Files"
           git diff --name-only HEAD~1
+          echo "::endgroup::"    
+          echo "::group::Diff for Dockerfile"
           git diff -U0 HEAD~1 -- Dockerfile
+          echo "::endgroup::"
           .github/scripts/move_improved.sh --debug
   #     - name: Enforce Contribution Policies
   #       if: github.event_name == 'push' || github.event_name == 'pull_request'

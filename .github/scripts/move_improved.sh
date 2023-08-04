@@ -49,7 +49,7 @@ lines_to_move=$(sed -n "${first_changed_line},${last_changed_line}p" "$input_fil
 ${DEBUG} && echo -e "lines_to_move: \n$lines_to_move"
 
 # Save the lines to a temporary file
-echo "$lines_to_move" > "${{ GITHUB_WORKSPACE }}/tmp/temp_lines_to_move.txt"
+echo "$lines_to_move" > $GITHUB_WORKSPACE/tmp/temp_lines_to_move.txt
 
 # delete new changes placed between thresholds from dockerfile
 sed -i "${first_changed_line},${last_changed_line}d" "$input_file"
