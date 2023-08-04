@@ -19,7 +19,7 @@ jobs:
       - name: Move Dockerfile Thresholds
         shell: bash
         run: |
-          .github/scripts/move_improved.sh
+          .github/scripts/move_improved.sh --debug
   #     - name: Enforce Contribution Policies
   #       if: github.event_name == 'push' || github.event_name == 'pull_request'
   #       shell: bash
