@@ -74,9 +74,11 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN dhffhd \
-    && bbbbbbb \
-    tool4=7.6.8
+ARG myarg
+
+COPY /app .
+
+RUN python app.py
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
