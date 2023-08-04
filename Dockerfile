@@ -29,6 +29,11 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
+RUN djskflhskfhldf \
+    && csidfhlseifhfl \
+    && dfhdkfghd \
+    pylint=6.5.4
+
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
 # info1

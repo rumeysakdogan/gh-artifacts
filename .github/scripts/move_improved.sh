@@ -47,10 +47,10 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
 
     # If the target lines are found, add a blank line above them
     if [ -n "$start_threshold_line_after_move" ]; then
-        line_number_above=$((start_threshold_line_after_move - 2))  # Line number above the target lines
+        line_number_above=$((start_threshold_line_after_move - 1))  # Line number above the target lines -2
 
         # Add the blank line above the target lines
-        sed -i -e "${start_threshold_line_after_move}i\\\\n" "Dockerfile"
+        sed -i -e "${line_number_above}i\\\\n" "Dockerfile"
         #sed -i "${start_threshold_line_after_move}i\\n" "Dockerfile" did not work
         #sed -i '${start_threshold_line_after_move}N;i\' "Dockerfile" did not work
         #sed -i -e "${start_threshold_line_after_move}i\\\\n" "Dockerfile" # adds double linebreak
