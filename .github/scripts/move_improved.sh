@@ -47,7 +47,7 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
 
     # If the target lines are found, add a blank line above them
     if [ -n "$start_threshold_line_after_move" ]; then
-        line_number_above=$((start_threshold_line_after_move - 2))  # Line number above the target lines
+        line_number_above=$((start_threshold_line_after_move - 1))  # Line number above the target lines -2
 
         # Add the blank line above the target lines
         sed -i -e "${start_threshold_line_after_move}i\\\\n" "Dockerfile"
@@ -58,18 +58,18 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
         #sed "${start_threshold_line_after_move}s/$/\n/" did not work
         #sed -i "${start_threshold_line_after_move}a\\" "Dockerfile" did not work
 
-        echo "::group:: print Dockerfile"
-        cat Dockerfile
-        echo "::endgroup::"
-        start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
-        ${DEBUG} && echo "start_threshold_line after adding double linebreak: $start_threshold_line_after_move"
-        line_number_above=$((start_threshold_line_after_move - 1))
+        # echo "::group:: print Dockerfile"
+        # cat Dockerfile
+        # echo "::endgroup::"
+        # start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
+        # ${DEBUG} && echo "start_threshold_line after adding double linebreak: $start_threshold_line_after_move"
+        # line_number_above=$((start_threshold_line_after_move - 1))
 
-        sed -i "${line_number_above}d" "Dockerfile"
-        start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
-        ${DEBUG} && echo "start_threshold_line after deleting extra linebreak from above start: $start_threshold_line_after_move"
-        line_number_below=$((start_threshold_line_after_move + 6))
-        sed -i "${line_number_below}d" "Dockerfile"
+        # sed -i "${line_number_above}d" "Dockerfile"
+        # start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
+        # ${DEBUG} && echo "start_threshold_line after deleting extra linebreak from above start: $start_threshold_line_after_move"
+        # line_number_below=$((start_threshold_line_after_move + 6))
+        #sed -i "${line_number_below}d" "Dockerfile"
     else
         echo "Target lines not found in the file."
     fi
