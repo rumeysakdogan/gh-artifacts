@@ -74,10 +74,10 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN apt-get update && \
-    apt-get install -y package1 package2 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN djskflhskfhldf \
+    && csidfhlseifhfl \
+    && dfhdkfghd \
+    pylint=6.5.4
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
