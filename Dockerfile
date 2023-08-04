@@ -74,10 +74,9 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN apt-get update && \
-    apt-get install -y package1 package2 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN uiohkskds \
+    && dskdjksdjdkfd \
+    tool=3.4.5
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
