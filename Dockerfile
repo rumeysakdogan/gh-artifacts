@@ -29,9 +29,10 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ENV mykey=myvalue \
-    apple=good \ 
-    fish=smells
+RUN dsahdklahdaldhak \
+    hdhgfksfgkjs \
+    sgfksdfgdsjfd \
+    python==3.9.8
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
