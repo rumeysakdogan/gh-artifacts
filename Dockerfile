@@ -74,13 +74,10 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ARG ARGUMENT1
-
-ENV test=more
-
-RUN xxxxxx \
-    && yyyy \
-    pylint=1.2.5
+RUN aaaaaaaaaa \
+    && bbbbbbbbb \
+    && ccccccc \
+    az-cli=2.3.4
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
