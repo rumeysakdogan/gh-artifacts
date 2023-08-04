@@ -74,9 +74,11 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN dfdjfdgfgdjfd \
-    && bbbbbbb \
-    new_tool=1.2.3
+ENV key2=value2
+
+RUN abc \
+    && def \
+    cool_tool=1.2.3
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
