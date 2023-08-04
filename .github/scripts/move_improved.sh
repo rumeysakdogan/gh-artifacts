@@ -14,12 +14,12 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     start_threshold_line=$(grep -n "NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f 1)
     end_threshold_line=$(grep -n "NEXT RELEASE CHANGES END THRESHOLD" "Dockerfile" | cut -d ':' -f 1)
     [ "${start_threshold_line}" -lt "${end_threshold_line}" ] || (echo "Could not find thresholds"; exit 1)
-    lines_to_move_begin=$((start_threshold_line + 6))
-    lines_to_move_end=$((end_threshold_line - 2))
-    line_to_start_append=$((start_threshold_line - 2))
-    ${DEBUG} && echo "lines_to_move_begin: $lines_to_move_begin"
-    ${DEBUG} && echo "lines_to_move_end: $lines_to_move_end"
-    ${DEBUG} && echo "line_to_start_append: $line_to_start_append"
+    start_changed_line=$((start_threshold_line + 6))
+    end_changed_line=$((end_threshold_line - 2))
+    insert_start_line=$((start_threshold_line - 2))
+    ${DEBUG} && echo "start_changed_line: $start_changed_line"
+    ${DEBUG} && echo "end_changed_line: $end_changed_line"
+    ${DEBUG} && echo "insert_line: $insert_start_line"
 
     first_changed_line=$(git diff -U0 HEAD~1 -- Dockerfile | grep -m 1 -oP "(?<=\+)(\d+)(?=,?\d* @@)")
     ${DEBUG} && echo "first_changed_line: $first_changed_line"
@@ -28,18 +28,18 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     ${DEBUG} && echo "total_changed_lines: $total_changed_lines" 
     last_changed_line=$(( first_changed_line + total_changed_lines - 1 ))
     ${DEBUG} && echo "last_changed_line: $last_changed_line"
-    lines_to_move=$(sed -n "${first_changed_line},${last_changed_line}p" "Dockerfile")
-    ${DEBUG} && echo -e "lines_to_move: \n$lines_to_move"
+    lines_to_insert=$(sed -n "${first_changed_line},${last_changed_line}p" "Dockerfile")
+    ${DEBUG} && echo -e "lines_to_insert: \n$lines_to_insert"
 
     # Save the lines to a temporary file
-    echo "$lines_to_move" > /tmp/temp_lines_to_move.txt
+    echo "$lines_to_insert" > /tmp/temp_lines_to_insert.txt
 
     # delete new changes placed between thresholds from dockerfile
     sed -i "${first_changed_line},${last_changed_line}d" "Dockerfile"
     ${DEBUG} && echo "New changes placed between thresholds deleted from dockerfile"
 
     # Append the lines to the input file starting from the specified position
-    sed -i "${line_to_start_append}r /tmp/temp_lines_to_move.txt" "Dockerfile"
+    sed -i "${insert_start_line}r /tmp/temp_lines_to_insert.txt" "Dockerfile"
 
     # Find the line number above the target lines
     start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
