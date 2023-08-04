@@ -74,10 +74,13 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN dsdfhsfshfsf \
-    && fskffsjkfhsjf \
-    && fdskgfsjkfgsjfsfshh \
-    pre-commit=2.3.4
+ENV key=value
+
+ARG my_argument
+
+RUN dasdhjkdsgdjks \
+    && dshfsjfhs \
+    pylint=1.2.3
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
