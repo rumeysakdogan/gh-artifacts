@@ -29,11 +29,6 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN aaa \
-    && bbb \
-    && cc \
-    pycheck=6.5.4
-
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
 # info1
