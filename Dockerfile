@@ -29,10 +29,9 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN dsahdklahdaldhak \
-    hdhgfksfgkjs \
-    sgfksdfgdsjfd \
-    supertool==3.9.8
+ENV mykey=myvalue \
+    apple=good \ 
+    fish=smells
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
