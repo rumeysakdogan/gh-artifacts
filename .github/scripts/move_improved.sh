@@ -14,7 +14,7 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     start_threshold_line=$(grep -n "NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f 1)
     end_threshold_line=$(grep -n "NEXT RELEASE CHANGES END THRESHOLD" "Dockerfile" | cut -d ':' -f 1)
     [ "${start_threshold_line}" -lt "${end_threshold_line}" ] || (echo "Could not find thresholds"; exit 1)
-    start_changed_line=$((start_threshold_line + 6))
+    start_changed_line=$((start_threshold_line + 5))
     end_changed_line=$((end_threshold_line - 2))
     insert_start_line=$((start_threshold_line - 2))
     ${DEBUG} && echo "start_changed_line: $start_changed_line"
@@ -57,6 +57,6 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     # fi
 
     # Clean up the temporary file
-    rm /tmp/temp_lines_to_move.txt
+    rm /tmp/temp_lines_to_insert.txt
 fi
 exit 0

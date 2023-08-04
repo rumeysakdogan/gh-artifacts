@@ -74,12 +74,13 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ENV key1=value1
+RUN zzzzzzzz \
+    && mmmmmmmmm \
+    cooly_tooly=1.2.3
 
-RUN lllllllll \
-    && kkkkkkkk \
-    && xxxxxx \
-    azcli=3.6.4
+ARG myarg
+
+ENV key3=value3
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
