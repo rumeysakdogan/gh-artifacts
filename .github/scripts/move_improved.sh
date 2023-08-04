@@ -50,9 +50,9 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
         line_number_above=$((start_threshold_line_after_move - 1))  # Line number above the target lines
 
         # Add the blank line above the target lines
-        sed -i -e "${start_threshold_line_after_move}i\&\" "Dockerfile"
+        #sed -i -e "${start_threshold_line_after_move}i\&\"" "Dockerfile"
         #sed "${start_threshold_line_after_move}s/$/\n/"
-        # sed '${start_threshold_line_after_move}G'
+        sed '${start_threshold_line_after_move}G'
     else
         echo "Target lines not found in the file."
     fi
