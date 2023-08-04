@@ -74,10 +74,9 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ARG hhhhhhhhh 
-
-COPY jjjjjjjjjjjj \
-    tool3=1.6.3
+RUN dhffhd \
+    && bbbbbbb \
+    tool4=7.6.8
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
