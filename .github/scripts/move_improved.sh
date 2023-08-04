@@ -42,18 +42,19 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     sed -i "${line_to_start_append}r /tmp/temp_lines_to_move.txt" "Dockerfile"
 
     # Find the line number above the target lines
-    line_number_above=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
+    start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
+    ${DEBUG} && echo "start_threshold_line: $start_threshold_line_after_move"
 
-    # If the target lines are found, add a blank line above them
-    if [ -n "$line_number_above" ]; then
-        line_number_above=$((line_number_above - 1))  # Line number above the target lines
+    # # If the target lines are found, add a blank line above them
+    # if [ -n "$start_threshold_line_after_move" ]; then
+    #     line_number_above=$((start_threshold_line_after_move - 1))  # Line number above the target lines
 
-        # Add the blank line above the target lines
-        sed -i -e "${line_number_above}i\\\\n" "Dockerfile"
-        #sed "${line_number_above}s/$/\n/"
-    else
-        echo "Target lines not found in the file."
-    fi
+    #     # Add the blank line above the target lines
+    #     sed -i -e "${start_threshold_line_after_move}i\\\\n" "Dockerfile"
+    #     #sed "${start_threshold_line_after_move}s/$/\n/"
+    # else
+    #     echo "Target lines not found in the file."
+    # fi
 
     # Clean up the temporary file
     rm /tmp/temp_lines_to_move.txt
