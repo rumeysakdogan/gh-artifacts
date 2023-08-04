@@ -74,10 +74,12 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-RUN eee \
-    && fffff \
-    && ccccccc \
-    az-cli=2.6.4
+ENV key1=value1
+
+RUN lllllllll \
+    && kkkkkkkk \
+    && xxxxxx \
+    azcli=3.6.4
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD

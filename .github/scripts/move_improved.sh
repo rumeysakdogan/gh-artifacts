@@ -56,6 +56,6 @@ if [[ ${changed_files} =~ "Dockerfile" ]]; then
     fi
 
     # Clean up the temporary file
-    rm $GITHUB_WORKSPACE/tmp/temp_lines_to_move.txt
+    rm /tmp/temp_lines_to_move.txt
 fi
 exit 0
