@@ -74,11 +74,9 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ARG myarg
-
-COPY /app .
-
-RUN python app.py
+ENV mykey=myvalue \
+    apple=good \ 
+    fish=smells
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
