@@ -26,11 +26,18 @@ jobs:
           echo "::endgroup::"
           echo "::group::List of Changed Files"
           git diff --name-only HEAD~1
+          echo "::endgroup::"
+          echo "::group::Dockerfile Before"
+          cat Dockerfile
           echo "::endgroup::"    
           echo "::group::Diff for Dockerfile"
           git diff -U0 HEAD~1 -- Dockerfile
           echo "::endgroup::"
           .github/scripts/move_improved.sh --debug
+          echo "::group::Dockerfile After"
+          cat Dockerfile
+          echo "::endgroup::"
+
   #     - name: Enforce Contribution Policies
   #       if: github.event_name == 'push' || github.event_name == 'pull_request'
   #       shell: bash

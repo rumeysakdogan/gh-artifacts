@@ -74,13 +74,13 @@ RUN djskflhskfhldf \
 # info4
 #####################################
 
-ENV key=value
+ARG ARGUMENT1
 
-ARG my_argument
+ENV test=more
 
-RUN dasdhjkdsgdjks \
-    && dshfsjfhs \
-    pylint=1.2.3
+RUN xxxxxx \
+    && yyyy \
+    pylint=1.2.5
 
 ####################################
 # NEXT RELEASE CHANGES END THRESHOLD
