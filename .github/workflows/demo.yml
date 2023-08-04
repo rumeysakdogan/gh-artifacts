@@ -13,78 +13,78 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Print Object
-        run: echo ${{ json.stringify(github.event) }}
-      - name: Print GitHub Context
-        run: |
-          echo "Github context: ${{ github }}"
+
       - name: Get pull request title
         run: |
-          echo ${{ github.event.pull_request.title }}
-      - name: Enforce Contribution Policies
-        if: github.event_name == 'push' || github.event_name == 'pull_request'
+          echo "GITHUB_WORKSPACE: ${{ GITHUB_WORKSPACE }}"
+      - name: Move Dockerfile Thresholds
         shell: bash
         run: |
-          chmod +x $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh
-          $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh ${{ github.head_ref}}
-        env:
-          PR_TITLE: "${{ github.event.pull_request.title }}"
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Lint code
-        run: npm run lint
-      - name: Test code
-        run: npm run test
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    outputs:
-      script-file: ${{ steps.publish.outputs.script-file }}
-      # 'script-file' is the name given by me for the output.
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Build website
-        run: npm run build
-      - name: Publish JS filename
-        id: publish
-        # run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';' deprecated
-        run: find dist/assets/*.js -type f -execdir echo 'script-file={} >> $GITHUB_OUTPUT' ';'
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist-files
-          path: dist
-          # path: |
-          #   dist
-          #   package.json
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: dist-files
-      - name: Output contents
-        run: ls
-      - name: Output filename
-        run: echo "${{ needs.build.outputs.script-file }}"
-      - name: Deploy
-        run: echo "Deploying..."
+          .github/scripts/move_improved.sh
+  #     - name: Enforce Contribution Policies
+  #       if: github.event_name == 'push' || github.event_name == 'pull_request'
+  #       shell: bash
+  #       run: |
+  #         chmod +x $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh
+  #         $GITHUB_WORKSPACE/.github/scripts/contribution_policy.sh ${{ github.head_ref}}
+  #       env:
+  #         PR_TITLE: "${{ github.event.pull_request.title }}"
+  #     - name: Cache dependencies
+  #       id: cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: node_modules
+  #         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+  #     - name: Install dependencies
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: npm ci
+  #     - name: Lint code
+  #       run: npm run lint
+  #     - name: Test code
+  #       run: npm run test
+  # build:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     script-file: ${{ steps.publish.outputs.script-file }}
+  #     # 'script-file' is the name given by me for the output.
+  #   steps:
+  #     - name: Get code
+  #       uses: actions/checkout@v3
+  #     - name: Cache dependencies
+  #       id: cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: node_modules
+  #         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+  #     - name: Install dependencies
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: npm ci
+  #     - name: Build website
+  #       run: npm run build
+  #     - name: Publish JS filename
+  #       id: publish
+  #       # run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';' deprecated
+  #       run: find dist/assets/*.js -type f -execdir echo 'script-file={} >> $GITHUB_OUTPUT' ';'
+  #     - name: Upload artifacts
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: dist-files
+  #         path: dist
+  #         # path: |
+  #         #   dist
+  #         #   package.json
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get build artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: dist-files
+  #     - name: Output contents
+  #       run: ls
+  #     - name: Output filename
+  #       run: echo "${{ needs.build.outputs.script-file }}"
+  #     - name: Deploy
+  #       run: echo "Deploying..."
