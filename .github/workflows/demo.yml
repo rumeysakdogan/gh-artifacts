@@ -37,7 +37,7 @@ jobs:
           git diff -U0 HEAD~1 -- Dockerfile
           echo "::endgroup::"
 
-          .github/scripts/move_improved.sh --debug
+          .github/scripts/aug10_move.sh --debug
 
           echo "::group::Dockerfile After"
           cat Dockerfile
