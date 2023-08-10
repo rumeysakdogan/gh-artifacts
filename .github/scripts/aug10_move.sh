@@ -55,7 +55,7 @@ sed -i "${insert_start_line}r /tmp/temp_lines_to_insert.txt" "Dockerfile"
 
 end_threshold_line=$(grep -n "NEXT RELEASE CHANGES END THRESHOLD" "Dockerfile" | cut -d ':' -f 1)
 linebreak_line=$((end_threshold_line - 1))
-sed -i '`${linebreak_line}`a\' "Dockerfile"
+sed -i -e '${linebreak_line}a\' "Dockerfile"
     # # Find the line number above the target lines
     # start_threshold_line_after_move=$(grep -n "# NEXT RELEASE CHANGES START THRESHOLD" "Dockerfile" | cut -d ':' -f1)
     # ${DEBUG} && echo "start_threshold_line: $start_threshold_line_after_move"
