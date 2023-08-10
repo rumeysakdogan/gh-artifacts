@@ -48,7 +48,7 @@ linebreak_line=$((end_threshold_line - 1))
 sed -i -e "${linebreak_line}i\\\\n" "Dockerfile"
 # Remove extra linebreak 
 end_threshold_line_after=$(grep -n "NEXT RELEASE CHANGES END THRESHOLD" "Dockerfile" | cut -d ':' -f 1)
-linebreak_line_to_remove=$((end_threshold_line - 2))
+linebreak_line_to_remove=$((end_threshold_line - 1))
 sed -i "${linebreak_line_to_remove}d" "Dockerfile"
 
 
