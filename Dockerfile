@@ -21,22 +21,20 @@ RUN djskflhskfhldf \
     && dfhdkfghd \
     pylint=6.5.4
 
-######################################
-# NEXT RELEASE CHANGES START THRESHOLD
+###############NEXT RELEASE CHANGES START THRESHOLD BEGIN#######################
 # info1
 # info2
 # info3
 # info4
-#####################################
+##################NEXT RELEASE CHANGES START THRESHOLD FINISH###################
 
 RUN dsahdklahdaldhak \
     hdhgfksfgkjs \
     sgfksdfgdsjfd \
     python==3.9.8
 
-####################################
-# NEXT RELEASE CHANGES END THRESHOLD
+################NEXT RELEASE CHANGES END THRESHOLD BEGIN#####################
 # info1
 # info2
 # info3
-####################################
+#################NEXT RELEASE CHANGES END THRESHOLD FINISH###################

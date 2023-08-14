@@ -21,23 +21,11 @@ jobs:
       - name: Move Dockerfile Thresholds
         shell: bash
         run: |
-          echo "::group::List of Files in Workspace"
-          ls "$GITHUB_WORKSPACE"
-          echo "::endgroup::"
-
-          # echo "::group::List of Changed Files"
-          # git diff --name-only HEAD~1
-          # echo "::endgroup::"
-
           echo "::group::Dockerfile Before"
           cat Dockerfile
           echo "::endgroup::"
 
-          # echo "::group::Diff for Dockerfile"
-          # git diff -U0 HEAD~1 -- Dockerfile
-          # echo "::endgroup::"
-
-          .github/scripts/aug10_move.sh --debug
+          .github/scripts/aug14_move.sh --debug
 
           echo "::group::Dockerfile After"
           cat Dockerfile
