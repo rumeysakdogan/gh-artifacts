@@ -21,17 +21,22 @@ jobs:
 
       - name: Test moving thresholds script
         run: |
+          cd .github/scripts/move-thresholds/
+          mv test-Dockerfile Dockerfile
+
           echo "::group::Dockerfile Before"
           cat Dockerfile
           echo "::endgroup::"
 
-          cd .github/scripts/move-thresholds/
-          mv test-Dockerfile Dockerfile
           ./aug14_move.sh --debug
 
           echo "::group::Dockerfile After"
           cat Dockerfile
           echo "::endgroup::"
+
+          echo "Test dir: `pwd`"
+          cd $GITHUB_WORKSPACE
+          pwd
 
       - name: Move Dockerfile Thresholds
         shell: bash
