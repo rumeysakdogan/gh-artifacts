@@ -1,9 +1,10 @@
 #!/bin/bash
 
 set -euo pipefail
+
 DEBUG=false
 
-if test "$1" == "--debug";then
+if [[ $# -eq 1 && "$1" == "--debug" ]]; then
     DEBUG=true
     shift
 fi
